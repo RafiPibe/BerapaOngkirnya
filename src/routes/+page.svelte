@@ -39,6 +39,14 @@
 
   const formatIdr = (value: number) => `IDR ${new Intl.NumberFormat("id-ID").format(value)}`;
 
+  const formatEtd = (value: string) => {
+    const trimmed = value.trim();
+    if (!trimmed) return "";
+    const lower = trimmed.toLowerCase();
+    if (lower.includes("day") || lower.includes("hari")) return trimmed;
+    return `${trimmed} hari`;
+  };
+
   const toArray = <T,>(value: unknown): T[] => {
     if (Array.isArray(value)) return value as T[];
     if (value && typeof value === "object") return [value as T];
@@ -359,8 +367,9 @@
           const etdRaw = result.etd ?? result.duration ?? result.estimate;
           const etd = typeof etdRaw === "string" ? etdRaw : etdRaw ? String(etdRaw) : "";
           const labelParts = [courierName, serviceName].filter(Boolean);
+          const etdLabel = formatEtd(etd);
           const label = `${labelParts.join(" · ")} - ${formatIdr(directCost)}${
-            etd ? ` (${etd} hari)` : ""
+            etdLabel ? ` (${etdLabel})` : ""
           }`;
           options.push({
             id: `${courierCode}-${serviceName}-${resultIndex}`,
@@ -407,8 +416,9 @@
             costRecord.etd ?? costRecord.etd_days ?? costRecord.duration ?? costRecord.estimate;
           const etd = typeof etdRaw === "string" ? etdRaw : etdRaw ? String(etdRaw) : "";
           const labelParts = [courierName, resolvedService].filter(Boolean);
+          const etdLabel = formatEtd(etd);
           const label = `${labelParts.join(" · ")} - ${formatIdr(value)}${
-            etd ? ` (${etd} hari)` : ""
+            etdLabel ? ` (${etdLabel})` : ""
           }`;
           options.push({
             id: `${courierCode}-${resolvedService}-${resultIndex}-${serviceIndex}`,
@@ -663,7 +673,7 @@
                 </p>
                 <p class="mt-1 text-sm text-[color:var(--muted)]">
                   {formatIdr(shippingEstimate.cost)}
-                  {shippingEstimate.etd ? ` · ${shippingEstimate.etd} hari` : ""}
+                  {shippingEstimate.etd ? ` · ${formatEtd(shippingEstimate.etd)}` : ""}
                 </p>
               </div>
             {:else}
@@ -695,7 +705,7 @@
                           {option.courierName} {option.service}
                         </p>
                         <p class="mt-1 text-xs text-[color:var(--muted)]">
-                          {option.description || (option.etd ? `Estimasi ${option.etd} hari` : "Layanan standar")}
+                          {option.description || (option.etd ? `Estimasi ${formatEtd(option.etd)}` : "Layanan standar")}
                         </p>
                       </div>
                       <span class="text-sm font-semibold text-[color:var(--ink)]">
