@@ -436,9 +436,6 @@
 
     <div class="relative mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-16 pt-16 lg:pb-20 lg:pt-20">
       <header class="space-y-6">
-        <div class="flex flex-wrap items-center gap-3">
-          <span class="badge">Beta</span>
-        </div>
         <h1
           class="text-4xl font-semibold text-[color:var(--ink)] sm:text-5xl lg:text-6xl"
           style="font-family: 'Fraunces', 'Times New Roman', serif;"
@@ -677,7 +674,6 @@
             <ul class="mt-3 space-y-2">
               <li>Gunakan nama kota lengkap untuk hasil terbaik.</li>
               <li>Berat default 1000 gram, ubah sesuai paketmu.</li>
-              <li>Hasil estimasi mengikuti data RajaOngkir Komerce.</li>
             </ul>
           </div>
         </aside>
