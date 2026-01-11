@@ -1,38 +1,59 @@
-# sv
+# Berapa Ongkirnya?
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+SvelteKit + Tailwind app for estimating shipping costs in Indonesia using the
+RajaOngkir Komerce API.
 
-## Creating a project
+## Features
+- Origin and destination search with RajaOngkir data.
+- Shipping cost calculation with courier/service breakdowns.
+- Clean UI with custom branding.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Requirements
+- Node.js + npm
+- RajaOngkir Komerce API key
 
-```sh
-# create a new project in the current directory
-npx sv create
+## Environment Variables
+Create `.env` in the project root:
 
-# create a new project in my-app
-npx sv create my-app
+```
+RAJAONGKIR_KEY=your_key_here
+# Optional override:
+# RAJAONGKIR_KOMERCE_BASE_URL=https://rajaongkir.komerce.id/api/v1
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+## Development
+```
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
-
-```sh
+## Build
+```
 npm run build
+npm run preview
 ```
 
-You can preview the production build with `npm run preview`.
+## API Routes Examples
+- `GET /api/rajaongkir/origin?search=bandung&limit=20`
+- `GET /api/rajaongkir/destination?search=surabaya&limit=20`
+- `POST /api/rajaongkir/cost`
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Example cost payload:
+```
+{
+  "origin": { "id": 123 },
+  "destination": { "id": 456 },
+  "weight": 1000,
+  "courier": "jne"
+}
+```
+
+## Deploy (Vercel)
+This repo uses `@sveltejs/adapter-vercel`.
+
+1. Set environment variables in Vercel:
+   - `RAJAONGKIR_KEY`
+   - `RAJAONGKIR_KOMERCE_BASE_URL` (optional)
+2. Build command: `npm run build`
+3. Output directory: `.vercel/output`
+

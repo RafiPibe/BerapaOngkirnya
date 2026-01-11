@@ -491,7 +491,7 @@
         </h1>
         <p class="max-w-2xl text-base text-[color:var(--cacao)] sm:text-lg">
           Masukkan asal, tujuan, dan berat paket untuk melihat estimasi ongkir tercepat.
-          Desainnya ringan, datanya serius.
+          Cepat, Kilat, Straight to the point.
         </p>
         <div class="flex flex-wrap gap-2 text-xs uppercase tracking-[0.25em] text-[color:var(--ink)]">
           <span class="chip">Cari kota dan distrik</span>
