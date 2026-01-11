@@ -13,6 +13,8 @@
 </svelte:head>
 
 <script lang="ts">
+  import favicon from "$lib/assets/favicon.svg";
+
   type DestinationOption = {
     id: string;
     label: string;
@@ -160,6 +162,20 @@
     destinationOptions = [];
     selectedDestination = "";
     resetShipping();
+  };
+
+  const handleOriginKeydown = (event: KeyboardEvent) => {
+    if (event.key !== "Enter") return;
+    event.preventDefault();
+    if (originLoading || !originQuery.trim()) return;
+    void handleOriginSearch();
+  };
+
+  const handleDestinationKeydown = (event: KeyboardEvent) => {
+    if (event.key !== "Enter") return;
+    event.preventDefault();
+    if (destinationLoading || !destinationQuery.trim()) return;
+    void handleDestinationSearch();
   };
 
   const handleOriginSearch = async () => {
@@ -436,6 +452,27 @@
 
     <div class="relative mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-16 pt-16 lg:pb-20 lg:pt-20">
       <header class="space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <a
+            href="https://pibe-porto.vercel.app"
+            class="flex items-center gap-3"
+            aria-label="Kunjungi Pibe Porto"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src={favicon}
+              alt="Berapa Ongkirnya logo"
+              class="h-11 w-11 rounded-2xl border border-[color:var(--line)] bg-white/80 p-2"
+            />
+            <div class="leading-tight">
+              <p class="text-xs uppercase tracking-[0.35em] text-[color:var(--cacao)]">
+                Berapa Ongkirnya
+              </p>
+              <p class="text-[11px] text-[color:var(--muted)]">Cek Ongkir made by Pibe</p>
+            </div>
+          </a>
+        </div>
         <h1
           class="text-4xl font-semibold text-[color:var(--ink)] sm:text-5xl lg:text-6xl"
           style="font-family: 'Fraunces', 'Times New Roman', serif;"
@@ -481,6 +518,7 @@
                   placeholder="Contoh: Bandung"
                   bind:value={originQuery}
                   oninput={clearOriginResults}
+                  onkeydown={handleOriginKeydown}
                 />
                 <button
                   class="rounded-2xl border border-[color:var(--ink)] px-5 py-3 text-xs uppercase tracking-[0.3em] text-[color:var(--ink)] transition hover:-translate-y-0.5 hover:bg-[color:var(--ink)] hover:text-white disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
@@ -526,6 +564,7 @@
                   placeholder="Contoh: Denpasar"
                   bind:value={destinationQuery}
                   oninput={clearDestinationResults}
+                  onkeydown={handleDestinationKeydown}
                 />
                 <button
                   class="rounded-2xl border border-[color:var(--ink)] px-5 py-3 text-xs uppercase tracking-[0.3em] text-[color:var(--ink)] transition hover:-translate-y-0.5 hover:bg-[color:var(--ink)] hover:text-white disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
