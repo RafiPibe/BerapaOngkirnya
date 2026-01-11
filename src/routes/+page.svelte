@@ -471,21 +471,24 @@
           <div class="mt-6 grid gap-6">
             <div class="space-y-3">
               <div class="flex items-center justify-between">
-                <label class="text-sm font-medium text-[color:var(--ink)]">Asal</label>
+                <label class="text-sm font-medium text-[color:var(--ink)]" for="origin-query">
+                  Asal
+                </label>
                 <span class="text-xs text-[color:var(--muted)]">Cari kota/kabupaten</span>
               </div>
               <div class="flex flex-wrap gap-3">
                 <input
                   class="flex-1 rounded-2xl border border-[color:var(--line)] bg-white/80 px-4 py-3 text-sm text-[color:var(--ink)] shadow-sm outline-none transition focus:border-[color:var(--accent)]"
                   type="text"
+                  id="origin-query"
                   placeholder="Contoh: Bandung"
                   bind:value={originQuery}
-                  on:input={clearOriginResults}
+                  oninput={clearOriginResults}
                 />
                 <button
                   class="rounded-2xl border border-[color:var(--ink)] px-5 py-3 text-xs uppercase tracking-[0.3em] text-[color:var(--ink)] transition hover:-translate-y-0.5 hover:bg-[color:var(--ink)] hover:text-white disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                   type="button"
-                  on:click={handleOriginSearch}
+                  onclick={handleOriginSearch}
                   disabled={originLoading || !originQuery.trim()}
                 >
                   {originLoading ? "Mencari..." : "Cari"}
@@ -495,7 +498,7 @@
                 <select
                   class="w-full rounded-2xl border border-[color:var(--line)] bg-white/80 px-4 py-3 text-sm text-[color:var(--ink)] outline-none disabled:cursor-not-allowed disabled:text-[color:var(--muted)]"
                   bind:value={selectedOrigin}
-                  on:change={handleOriginSelect}
+                  onchange={handleOriginSelect}
                   disabled={originOptions.length === 0}
                 >
                   <option value="">
@@ -513,21 +516,24 @@
 
             <div class="space-y-3">
               <div class="flex items-center justify-between">
-                <label class="text-sm font-medium text-[color:var(--ink)]">Tujuan</label>
+                <label class="text-sm font-medium text-[color:var(--ink)]" for="destination-query">
+                  Tujuan
+                </label>
                 <span class="text-xs text-[color:var(--muted)]">Cari kecamatan/zip</span>
               </div>
               <div class="flex flex-wrap gap-3">
                 <input
                   class="flex-1 rounded-2xl border border-[color:var(--line)] bg-white/80 px-4 py-3 text-sm text-[color:var(--ink)] shadow-sm outline-none transition focus:border-[color:var(--accent)]"
                   type="text"
+                  id="destination-query"
                   placeholder="Contoh: Denpasar"
                   bind:value={destinationQuery}
-                  on:input={clearDestinationResults}
+                  oninput={clearDestinationResults}
                 />
                 <button
                   class="rounded-2xl border border-[color:var(--ink)] px-5 py-3 text-xs uppercase tracking-[0.3em] text-[color:var(--ink)] transition hover:-translate-y-0.5 hover:bg-[color:var(--ink)] hover:text-white disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                   type="button"
-                  on:click={handleDestinationSearch}
+                  onclick={handleDestinationSearch}
                   disabled={destinationLoading || !destinationQuery.trim()}
                 >
                   {destinationLoading ? "Mencari..." : "Cari"}
@@ -537,7 +543,7 @@
                 <select
                   class="w-full rounded-2xl border border-[color:var(--line)] bg-white/80 px-4 py-3 text-sm text-[color:var(--ink)] outline-none disabled:cursor-not-allowed disabled:text-[color:var(--muted)]"
                   bind:value={selectedDestination}
-                  on:change={handleDestinationSelect}
+                  onchange={handleDestinationSelect}
                   disabled={destinationOptions.length === 0}
                 >
                   <option value="">
@@ -559,7 +565,7 @@
                 <select
                   class="w-full rounded-2xl border border-[color:var(--line)] bg-white/80 px-4 py-3 text-sm text-[color:var(--ink)] outline-none"
                   bind:value={courier}
-                  on:change={handleCourierChange}
+                  onchange={handleCourierChange}
                 >
                   {#each COURIER_OPTIONS as option}
                     <option value={option.id}>{option.label}</option>
@@ -575,7 +581,7 @@
                   min="1"
                   step="1"
                   bind:value={weight}
-                  on:input={handleWeightInput}
+                  oninput={handleWeightInput}
                 />
               </label>
             </div>
@@ -584,7 +590,7 @@
               <button
                 class="w-full rounded-2xl bg-[color:var(--ink)] px-5 py-4 text-xs uppercase tracking-[0.35em] text-white shadow-[0_20px_40px_rgba(37,30,25,0.25)] transition hover:-translate-y-0.5 hover:bg-[color:var(--accent)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
                 type="button"
-                on:click={handleCalculateShipping}
+                onclick={handleCalculateShipping}
                 disabled={
                   shippingLoading ||
                   originLoading ||
@@ -645,7 +651,7 @@
                         : "border-[color:var(--line)] bg-white/80 hover:-translate-y-0.5"
                     }`}
                     type="button"
-                    on:click={() => selectService(option)}
+                    onclick={() => selectService(option)}
                   >
                     <div class="flex items-start justify-between gap-3">
                       <div>
